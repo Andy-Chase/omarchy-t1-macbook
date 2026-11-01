@@ -1,0 +1,96 @@
+--- a/appletbdrm.c
++++ b/appletbdrm.c
+@@ -192,6 +192,7 @@
+ 	unsigned int stray_messages = 0;
+ 
+ retry:
++	memset(response, 0, size);
+ 	ret = usb_bulk_msg(udev, usb_rcvbulkpipe(udev, adev->in_ep),
+ 			   response, size, &actual_size, APPLETBDRM_BULK_MSG_TIMEOUT);
+ 	if (ret) {
+@@ -284,6 +285,29 @@
+ 	return appletbdrm_send_msg(adev, APPLETBDRM_MSG_SIGNAL_READINESS);
+ }
+ 
++/* Bounded drain of stale T1 replies before issuing a fresh GINF request. */
++static int appletbdrm_drain_t1(struct appletbdrm_device *adev)
++{
++    struct usb_device *udev = adev_to_udev(adev);
++    u8 *buf;
++    int ret = 0, actual_size, attempt;
++    if (le16_to_cpu(udev->descriptor.idProduct) != 0x8600)
++        return 0;
++    buf = kmalloc(512, GFP_KERNEL);
++    if (!buf)
++        return -ENOMEM;
++    for (attempt = 0; attempt < 8; attempt++) {
++        ret = usb_bulk_msg(udev, usb_rcvbulkpipe(udev, adev->in_ep),
++                           buf, 512, &actual_size, 50);
++        if (ret == -ETIMEDOUT) { ret = 0; break; }
++        if (ret) break;
++        drm_info(&adev->drm, "Drained stale T1 reply: %d bytes\n", actual_size);
++    }
++    if (attempt == 8) ret = -EBUSY;
++    kfree(buf);
++    return ret;
++}
++
+ static int appletbdrm_get_information(struct appletbdrm_device *adev)
+ {
+ 	struct appletbdrm_msg_information *info;
+@@ -296,9 +320,13 @@
+ 	if (!info)
+ 		return -ENOMEM;
+ 
++	ret = appletbdrm_drain_t1(adev);
++	if (ret)
++		goto free_info;
++
+ 	ret = appletbdrm_send_msg(adev, APPLETBDRM_MSG_GET_INFORMATION);
+ 	if (ret)
+-		return ret;
++		goto free_info;
+ 
+ 	ret = appletbdrm_read_response(adev, &info->header, sizeof(*info),
+ 				       APPLETBDRM_MSG_GET_INFORMATION);
+@@ -311,6 +339,13 @@
+ 	adev->width = get_unaligned_le32(&info->width);
+ 	adev->height = get_unaligned_le32(&info->height);
+ 
++    if (!((adev->width >= 1800 && adev->width <= 2400 && adev->height == 60) ||
++          (adev->height >= 1800 && adev->height <= 2400 && adev->width == 60))) {
++        ret = -EINVAL;
++        goto free_info;
++    }
++    drm_info(drm, "Validated full GINF reply: %ux%u, %u bpp\n", adev->width, adev->height, bits_per_pixel);
++
+ 	if (bits_per_pixel != APPLETBDRM_BITS_PER_PIXEL) {
+ 		drm_err(drm, "Encountered unexpected bits per pixel value (%d)\n", bits_per_pixel);
+ 		ret = -EINVAL;
+@@ -348,7 +383,7 @@
+ };
+ 
+ static int appletbdrm_primary_plane_helper_atomic_check(struct drm_plane *plane,
+-						   struct drm_atomic_state *state)
++						   struct drm_atomic_commit *state)
+ {
+ 	struct drm_plane_state *new_plane_state = drm_atomic_get_new_plane_state(state, plane);
+ 	struct drm_plane_state *old_plane_state = drm_atomic_get_old_plane_state(state, plane);
+@@ -516,7 +551,7 @@
+ }
+ 
+ static void appletbdrm_primary_plane_helper_atomic_update(struct drm_plane *plane,
+-						     struct drm_atomic_state *old_state)
++						     struct drm_atomic_commit *old_state)
+ {
+ 	struct appletbdrm_device *adev = drm_to_adev(plane->dev);
+ 	struct drm_device *drm = plane->dev;
+@@ -533,7 +568,7 @@
+ }
+ 
+ static void appletbdrm_primary_plane_helper_atomic_disable(struct drm_plane *plane,
+-							   struct drm_atomic_state *state)
++							   struct drm_atomic_commit *state)
+ {
+ 	struct drm_device *dev = plane->dev;
+ 	struct appletbdrm_device *adev = drm_to_adev(dev);

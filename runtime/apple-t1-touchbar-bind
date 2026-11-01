@@ -1,0 +1,28 @@
+#!/bin/bash
+# Hand off only the T1 HID interfaces. The SPI keyboard and USB controllers stay loaded.
+set -euo pipefail
+[[ $(cat /sys/class/dmi/id/product_name) == MacBookPro13,2 ]]
+modprobe apple_ib_tb
+modprobe apple_ib_als
+target=/sys/bus/hid/drivers/apple-ibridge-hid
+[[ -d $target ]]
+for device in /sys/bus/hid/devices/0003:05AC:8600.*; do
+  [[ -d $device ]] || continue
+  name=${device##*/}
+  previous=$(readlink -f "$device/driver" || true)
+  [[ $previous == "$target" ]] && continue
+  case ${previous##*/} in
+    hid-generic|hid-sensor-hub) ;;
+    '') ;;
+    *) echo "Refusing unexpected owner: $previous" >&2; exit 1 ;;
+  esac
+  if [[ -n $previous ]]; then
+    printf '%s' "$name" > "$previous/unbind"
+  fi
+  if ! printf '%s' "$name" > "$target/bind"; then
+    if [[ -n $previous ]]; then
+      printf '%s' "$name" > "$previous/bind" || true
+    fi
+    exit 1
+  fi
+done

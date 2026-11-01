@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-01",
+  "timezone": "Australia/Brisbane",
+  "method": "User supplied successful install/activate output; installed code hashes independently compared",
+  "install_result": "FILES_INSTALLED",
+  "activation_result": "Services started. Physical operation still needs confirmation.",
+  "modules": "Existing working modules reused; no new DKMS provider installed by this migration",
+  "installed_files": {
+    "selector": {
+      "matches_candidate": true,
+      "sha256": "3fadbaab0f5746755a4ea46bfc0b4fa876090e61e00e4d32bdd988875e643b92"
+    },
+    "session-bridge.py": {
+      "matches_candidate": true,
+      "sha256": "a7f58c113c23f32521de36fe2d0e6572b92bb74f8de12a920bd000135944a07e",
+      "note": "Startup correction installed by owner and independently matched."
+    },
+    "hardware-service.py": {
+      "matches_candidate": true,
+      "sha256": "e59a00bba0c911ed2ac99f856568fbca0ad44864e9497a7833efe85e140d93ee"
+    },
+    "config.py": {
+      "matches_candidate": true,
+      "sha256": "734a153642abf28001fe8a0d7a6fc5fe8f0b6317cffd8e4e3830858797508798"
+    }
+  },
+  "optional_features": [
+    "chatgpt",
+    "files",
+    "markets",
+    "news",
+    "piano",
+    "weather"
+  ],
+  "shared_user_unit_present": true,
+  "physical_operation": "Initial requested checks passed, confirmed by owner",
+  "physical_confirmation": {
+    "date": "2026-11-01",
+    "user_response": "all passed",
+    "checks": {
+      "display_and_touch_alignment": "passed",
+      "escape": "passed",
+      "workspace_switching": "passed",
+      "display_brightness_slider": "passed",
+      "volume_slider": "passed",
+      "keyboard_light_slider": "passed",
+      "lock_label_and_unlock_restoration": "passed",
+      "piano": "passed",
+      "news": "passed",
+      "logout_login_automatic_touchbar": "passed",
+      "full_shutdown_power_on_automatic_touchbar": "passed",
+      "existing_wifi_reconnect_after_power_on": "passed"
+    },
+    "not_yet_confirmed": [
+      "sleep/resume",
+      "rollback",
+      "other optional pages",
+      "independent clean installation"
+    ],
+    "lifecycle_user_response": "conformed",
+    "lifecycle_response_context": "Confirmation of Touch Bar returning after logout/login and full shutdown/power-on, with Wi-Fi reconnecting."
+  },
+  "camera_observation": {
+    "date": "2026-11-01",
+    "method": "Owner supplied v4l2-ctl enumeration; read-only sysfs and kernel journal inspection",
+    "media_controller_listed": true,
+    "video_capture_node_listed": false,
+    "capture_status": "No capture node in two owner enumerations; current full-power-on boot still logs the same UVC error. No successful capture.",
+    "active_t1_configuration": 2,
+    "video_control_driver": "uvcvideo",
+    "video_streaming_interface_driver": null,
+    "cached_descriptor_configurations": {
+      "1": {
+        "advertised_format_count": 0
+      },
+      "2": {
+        "advertised_format_count": 0
+      },
+      "3": {
+        "advertised_format_count": 0
+      }
+    },
+    "kernel_message": "No streaming interface found for terminal 32770.",
+    "message_observed_in_usb_configurations": [
+      1,
+      2
+    ],
+    "message_predates_latest_candidate_migration": true,
+    "cause": "unresolved; no repair attempted",
+    "repeat_enumeration": "Owner again reports media controller only; a new boot is independently visible in the journal."
+  },
+  "startup_observation": {
+    "method": "Read-only current-boot system and user service journals",
+    "automatic_service_start_observed": true,
+    "renderer_ready_after_retry": true,
+    "initial_bridge_failure": "HYPRLAND_INSTANCE_SIGNATURE absent before bridge startup; dead renderer socket remained",
+    "initial_renderer_failure": "Connection refused; supervisor restored original bindings and retried",
+    "candidate_fix": "Publish renderer socket only after compositor connection and initial session setup",
+    "candidate_bridge_sha256": "a7f58c113c23f32521de36fe2d0e6572b92bb74f8de12a920bd000135944a07e",
+    "automated_regression_tests": 4,
+    "python_suite_total": 52,
+    "fix_installed": true,
+    "full_shutdown_vs_restart": "Owner confirmed full shutdown/power-on",
+    "logout_login_result": "Owner-confirmed passed",
+    "wifi_after_startup": "Owner-confirmed reconnect passed using existing Wi-Fi configuration",
+    "upgrade_activation": "Owner supplied FILES_INSTALLED and successful activation; fresh service invocation shows BRIDGE_READY, BRIDGE_CONNECTED and SELECTOR_READY without a renderer failure.",
+    "fixed_logout_and_boot_test": "Owner-confirmed passed",
+    "latest_boot_journal": "Bridge initially deferred startup for absent Hyprland environment, then published socket and connected. Renderer reached SELECTOR_READY without a renderer failure or supervisor restore/retry."
+  }
+}

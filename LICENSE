@@ -1,0 +1,11 @@
+This project's new userspace code, scripts, tests and documentation are
+licensed under GPL-2.0-only. The full licence is in
+LICENSES/GPL-2.0-only.txt.
+
+Vendored kernel source retains its existing SPDX, copyright and licence
+notices. See CREDITS.md for provenance and the source manifest for hashes.
+
+Apple firmware, machine-specific FDRData, EFI ROM variables, the personalised
+Wi-Fi board-data file and third-party branded image assets aren't included.
+The community Wi-Fi template is obtained separately from its upstream source;
+this project's licence doesn't grant additional rights in that data.

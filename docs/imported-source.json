@@ -1,0 +1,150 @@
+{
+  "note": "Hashes before portability changes; private runtime data excluded.",
+  "sources": [
+    {
+      "path": "touchbar/selector.c",
+      "source": "touchbar-files-menu/news/selector.c",
+      "sha256": "aab7b8adfac38b63c3070b04c84926d4a8205d8612a1c0a48e6e04a408369e9b"
+    },
+    {
+      "path": "touchbar/weather-view.h",
+      "source": "touchbar-files-menu/news/weather-view.h",
+      "sha256": "0e413d6179b98a4225d1d060c5886bacbe2b53d98aa847bfe0fc290b034cbf14"
+    },
+    {
+      "path": "touchbar/news-view.h",
+      "source": "touchbar-files-menu/news/news-view.h",
+      "sha256": "a852dbf312758ffd64b7f96fdef2529a3522efe2b5c134ff28f0cd85f2ddd09e"
+    },
+    {
+      "path": "touchbar/media_buttons.py",
+      "source": "installed-user-helper/media_buttons.py",
+      "sha256": "9be5f46a712e77cc436823ff52b98ac14c71b7a82a677f1eda85ecd9e68a04d6"
+    },
+    {
+      "path": "touchbar/weather.py",
+      "source": "installed-user-helper/weather.py",
+      "sha256": "75447e87d5766eccd6ce8cf05f0d2a861f06b6750ff212c2cd4b037f280a66da"
+    },
+    {
+      "path": "touchbar/media-controls.py",
+      "source": "installed-user-helper/media-controls.py",
+      "sha256": "fdaa8cfa78e81fdc02f77a4ad17424e89ccae564cdafa4ea641eff885808f8fb"
+    },
+    {
+      "path": "touchbar/nightlight.py",
+      "source": "installed-user-helper/nightlight.py",
+      "sha256": "ddf660f6cd3589e8c8406a49b62b28fcec98d946a9d67c6bfa224f7f2891edf2"
+    },
+    {
+      "path": "touchbar/battery_details.py",
+      "source": "installed-user-helper/battery_details.py",
+      "sha256": "7b96f1f3c7a8fbbcca5995897c2de18ce9deb0a50f4c77d75259b3733d632eff"
+    },
+    {
+      "path": "touchbar/wifi_details.py",
+      "source": "installed-user-helper/wifi_details.py",
+      "sha256": "f673d3f9444b72345f77d60b72d9defe5de6df5e7109fe04148ddaf8956ecace"
+    },
+    {
+      "path": "touchbar/markets.py",
+      "source": "installed-user-helper/markets.py",
+      "sha256": "fdde45e2f408f0063cdd06c6c9538ad2747e8c826be80c0350c93c261ed588d2"
+    },
+    {
+      "path": "touchbar/piano.py",
+      "source": "installed-user-helper/piano.py",
+      "sha256": "0083b129845a4755c79c7af4bcee408d09ec5f8e9d9c36b18009aa0888fae1ac"
+    },
+    {
+      "path": "touchbar/file_shortcuts.py",
+      "source": "installed-user-helper/file_shortcuts.py",
+      "sha256": "2467ba5a414ea2461eb9194a366de92bdff682cd312fa3519db2d4318e9aa77d"
+    },
+    {
+      "path": "touchbar/session-bridge.py",
+      "source": "installed-user-helper/session-bridge.py",
+      "sha256": "e9bda59aeed23260c5c5c1bb9361f570fd1d8197851128e86208360c1ceab08f"
+    },
+    {
+      "path": "touchbar/news.py",
+      "source": "installed-user-helper/news.py",
+      "sha256": "e26313697839147c6a7782f95c28a1a682ddee2d20830c1ff75bb310cc5ad0f2"
+    },
+    {
+      "path": "drivers/legacy/apple-ibridge.c",
+      "source": "touchbar-package/apple-ibridge.c",
+      "sha256": "5f5f7fdaf8013a720343b537e01946bf7bd386da45f7a98d905a0b3057807b02"
+    },
+    {
+      "path": "drivers/legacy/apple-ibridge.h",
+      "source": "touchbar-package/apple-ibridge.h",
+      "sha256": "fa2ccc77953a9b977b947da6d145be7545b3d5063aeb57b6c42a1c192a183f33"
+    },
+    {
+      "path": "drivers/legacy/apple-ib-tb.c",
+      "source": "touchbar-package/apple-ib-tb.c",
+      "sha256": "6e8f6de53a83e7bb9bd8c47cd9e14472d41bdd724a990525a1dbe2aec407d4e6"
+    },
+    {
+      "path": "drivers/legacy/apple-ib-als.c",
+      "source": "touchbar-package/apple-ib-als.c",
+      "sha256": "74cee6727fad8648d88136365665ac7c983bcbef8e0e0d1a1262913e33ba3e95"
+    },
+    {
+      "path": "drivers/legacy/Makefile",
+      "source": "touchbar-package/Makefile",
+      "sha256": "cb973b7643bf30a08f100278806ea60c77c46a5a5b6929e7409c9acb6c304a73"
+    },
+    {
+      "path": "drivers/graphics/appletbdrm.c",
+      "source": "touchbar-workspace-selector/appletbdrm.c",
+      "sha256": "878b0b24fff7b544f3a8dde2b548be69427ac224b31869f38752a61d7b1b999a"
+    },
+    {
+      "path": "drivers/graphics/omarchy-t1-raw.c",
+      "source": "touchbar-workspace-selector/omarchy-t1-raw.c",
+      "sha256": "dd5b1bc496cc3dd389adbc6c844a2a20c6e227fe6135e70f2e6b52d967196e59"
+    },
+    {
+      "path": "LICENSES/GPL-2.0-only.txt",
+      "source": "touchbar-package/LICENSE",
+      "sha256": "db296f2f7f35bca3a174efb0eb392b3b17bd94b341851429a3dff411b1c2fc73"
+    },
+    {
+      "path": "runtime/hardware-service.py",
+      "source": "touchbar-workspace-selector/hardware-service.py",
+      "sha256": "28e4d0f884208d0176a29d434e26669579f65a13ed4c162fb1fcbc1a29dfd958"
+    },
+    {
+      "path": "runtime/apple-t1-touchbar-bind",
+      "source": "apple-t1-touchbar-bind",
+      "sha256": "a969c0fbbdf8b4fe6e55545fefeadd6d25dc88857ee3453ede3449a925cabfbd"
+    },
+    {
+      "path": "tests/test_news.py",
+      "source": "touchbar-news/news-check.py",
+      "sha256": "806bcbc2486a98d75f5ed4daabe1cba67ad9ac9ff62b3ed656dfad9998a37980"
+    },
+    {
+      "path": "tests/test_files.py",
+      "source": "touchbar-news/files-check.py",
+      "sha256": "8c0e5954e8e191da54c5cc9a8d170f36de3295e642b2567f63a0523718123dc0"
+    },
+    {
+      "path": "tests/check_piano_expression.py",
+      "source": "touchbar-piano-clean/piano-expression-check.py",
+      "sha256": "f0d17b29cec19ed22492b052580f179b21b64e04dc8f3c728d26fc2930103842"
+    },
+    {
+      "path": "tests/check_piano_demo.py",
+      "source": "touchbar-piano-clean/piano-demo-check.py",
+      "sha256": "10966b28e7b92a7a43515b53361c3dd948b18a2c2c22930d64565f5e8ce16dcb"
+    },
+    {
+      "path": "tests/check_piano.py",
+      "source": "touchbar-piano-clean/piano-check.py",
+      "sha256": "b520f7a8e6dbf72283cab0ce045974d88545a815ccc2b3feff6da9508edf42bb"
+    }
+  ]
+}
