@@ -1,0 +1,47 @@
+name: Publish reviewed 0.1.0-rc1
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-rc1.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prerelease:
+    if: github.repository == 'Andy-Chase/omarchy-t1-macbook' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 16381474e46c9a0dd497d6e07345ac49c51de0dc
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libcairo2-dev libdrm-dev python3
+      - name: Test the approved source
+        run: make test-full
+      - name: Rebuild and verify the reviewed archive
+        run: |
+          make archive
+          echo 'd9c8b6441beeed17bdc91184cb3578e701c2f44d5a22d8743a0505df23682a3d  dist/omarchy-t1-macbook-0.1.0-rc1.zip' | sha256sum --check -
+      - name: Prepare release notes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path('docs/RELEASE.md').read_text()
+          text = text.replace("This candidate is ready for public-source review; it hasn't been published.", "Published as an experimental prerelease for exact-model testing.")
+          text += "\nApproved source commit: `16381474e46c9a0dd497d6e07345ac49c51de0dc`.\n"
+          text += "\nSource ZIP SHA256: `d9c8b6441beeed17bdc91184cb3578e701c2f44d5a22d8743a0505df23682a3d`.\n"
+          Path('release-notes.md').write_text(text)
+          PY
+      - name: Publish experimental prerelease and source assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create 0.1.0-rc1 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target 16381474e46c9a0dd497d6e07345ac49c51de0dc \
+            --prerelease \
+            --title '0.1.0-rc1 — experimental T1 MacBook support' \
+            --notes-file release-notes.md \
+            dist/omarchy-t1-macbook-0.1.0-rc1.zip dist/SHA256SUMS
