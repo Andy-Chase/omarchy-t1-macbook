@@ -1,10 +1,52 @@
+<div align="center">
+
 # Omarchy T1 MacBook
 
-Custom Touch Bar controls and documented BCM43602 Wi-Fi workarounds for the **2016 13-inch MacBook Pro, MacBookPro13,2 / A1706**, on Omarchy.
+### Give your Touch Bar a second act.
 
-**0.1.0-rc1 — experimental, tested on one MacBookPro13,2.** The consolidated candidate builds, passes 52 Python tests and has been installed using the reference laptop's existing working kernel modules. The owner confirmed display/touch, Escape/workspaces, sliders, lock/unlock, piano/news, automatic return after logout/login and full shutdown/power-on. The existing Wi-Fi configuration also reconnected. Camera capture is unavailable; suspend/resume, live rollback, fresh DKMS installation and independent reproduction remain unverified. See [release notes](docs/RELEASE.md).
+An experimental community project bringing a useful, customisable Touch Bar to the **2016 13-inch MacBook Pro** running **Omarchy**.
 
-## What it provides
+[Explore the features](#meet-your-touch-bar) · [See the previews](#a-closer-look) · [Installation guide](docs/INSTALL.md) · [What works today](docs/VALIDATION.md)
+
+</div>
+
+![Illustration of a silver laptop with an illuminated Touch Bar, including miniature piano keys](docs/previews/omarchy-t1-hero.png)
+
+*Artist's impression: the illustration combines several Touch Bar modes for effect. The previews below show the software interface.*
+
+> [!IMPORTANT]
+> **Experimental: 0.1.0-rc1 has been tested on one MacBookPro13,2 / A1706.** Display and touch, core controls, piano, news, logout/login and a full shutdown/power-on have been confirmed on the reference laptop. Camera capture is unavailable; suspend/resume, live rollback, a fresh DKMS installation and independent reproduction remain unverified. Read the [release notes](docs/RELEASE.md) and [installation guide](docs/INSTALL.md) before trying it.
+
+## Meet your Touch Bar
+
+Your laptop already has a little screen above the keyboard. This project gives it more to do: switch workspaces, adjust your settings, keep an eye on the day — or, when the moment calls for it, play a very small piano.
+
+| | At your fingertips |
+| --- | --- |
+| **The essentials** | Escape, Hyprland workspaces, function keys, brightness, keyboard light, volume, media and battery controls. |
+| **A little focus** | A timer with 5, 10, 15 and 25-minute presets, pause and clear, plus blue overtime when time's up. |
+| **Your daily dashboard** | Optional weather forecasts, news headlines, delayed market data, folder shortcuts and a ChatGPT app shortcut. |
+| **A surprisingly small piano** | 25 keys, octave shifts, sustain and eight demos. Because of course your Touch Bar needed a piano. |
+
+Optional pages are selected at installation and default off. News and markets depend on third-party services; weather uses shared Omarchy data where available or an explicitly configured location. See [features and data sources](docs/FEATURES.md).
+
+## A closer look
+
+These are **synthetic software renders**, not photographs of the physical panel. The hero above is an illustrative interpretation.
+
+**Everyday controls** — workspaces and shortcuts alongside media and system controls.
+
+![Software render of the Touch Bar showing workspaces, shortcuts and system controls](docs/previews/full.png)
+
+**Headlines, without leaving your keyboard** — browse news by category and move through headlines.
+
+![Software render of the Touch Bar news categories](docs/previews/news.png)
+
+**The tiny concert hall** — play notes yourself or choose a demo.
+
+![Software render of the Touch Bar piano with blue highlighted keys](docs/previews/piano.png)
+
+## What the project provides
 
 - Basic firmware-rendered Touch Bar controls using the existing T1 iBridge driver lineage.
 - A custom 2170 × 60 strip with Escape, Hyprland workspaces, F-keys, sliders, media controls, battery/power information and a timer.
